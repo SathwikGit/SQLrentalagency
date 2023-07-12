@@ -1,0 +1,284 @@
+create table users(
+adhar_id int,
+name varchar(20),
+age int,
+password varchar(20),
+doorno int,
+street varchar(20),
+city varchar(20),
+pin int,
+job varchar(20),
+primary key (adhar_id)
+);
+
+ create table phone
+    (
+    adhar_id int,
+    phno1 int,
+    phno2 int,
+    foreign key(adhar_id) references users(adhar_id)
+    );
+
+
+create table property(
+ adhar_id int,
+ prop_id int,
+ floors int,
+ start_date date,
+ end_date date,
+ area int,
+ address varchar(30),
+ rent int,
+ hike int,
+ yoc int,
+ bedno int,
+ availabilty int,
+ locality varchar(10),
+ primary key(prop_id),
+ foreign key(adhar_id) references users(adhar_id)
+);
+
+
+
+create table records(
+ prop_id int,
+ adhar_id int,
+ start_date date,
+ end_date date,
+ rent int,
+ hike int,
+ comm int,	
+ primary key(prop_id,start_date),
+ foreign key(prop_id) references property(prop_id),
+ foreign key (adhar_id) references users(adhar_id)
+);
+
+
+
+create or replace procedure CreateNewUser(a in number,b in varchar,c in number,d in varchar,e in number,f in varchar,g in varchar,h in number,i in varchar)is
+begin
+insert into users values(a,b,c,d,e,f,g,h,i);
+end;
+/
+
+exec CreateNewUser(1,'Rohith',20,'Hello',123,'H','VJY',521230,'Admin');
+exec CreateNewUser(2,'Kumar',23,'abcd',227,'A','BLR',423514,'User');
+exec CreateNewUser(3,'Shankar',32,'Sha123',142,'C','CHE',532015,'User');
+exec CreateNewUser(4,'Lalitha',26,'Lala',236,'B','DEL',236140,'User');
+exec CreateNewUser(5,'Shivani',29,'Shiv',247,'B','VJY',521230,'User');
+exec CreateNewUser(6,'Ravi',22,'Ravs',18,'S','DEL',236140,'Admin');
+exec CreateNewUser(7,'Akhil',28,'Akh',47,'E','BLR',423514,'User');
+exec CreateNewUser(8,'Alice',25,'p@ssw0rd',456,'D','DEL',236140, 'User');
+exec CreateNewUser(9,'Bob',42,'s3cr3t', 789, 'E', 'MUM', 400001, 'User');
+exec CreateNewUser(10,'Carol',33,'letmein', 234, 'G', 'BLR', 560001, 'User');
+exec CreateNewUser(11,'David',28,'changeme', 567,'I','KOL',700001,'User');
+exec CreateNewUser(12,'Emily',19,'password123',890, 'F','HYD',500001, 'Admin');
+exec CreateNewUser(13,'Frank',46,'qwerty',123,'A','KOL',700001,'User');
+exec CreateNewUser(14,'Grace',31,'abc123',456,'C','DEL',236140,'Admin');
+exec CreateNewUser(15,'Henry',36,'letmein123',789,'B','MUM',400001, 'User');
+exec CreateNewUser(16,'Isabelle',27,'letmein321',234,'M','KOL', 700001, 'User');
+exec CreateNewUser(17,'Jack', 39,'password456',567, 'B','DEL',236140, 'User');
+exec CreateNewUser(18,'Katherine',23,'qwerty123',890,'D','MUM', 400001, 'User');
+exec CreateNewUser(19,'Liam',35,'letmein567', 123, 'B','CHE',532015, 'User');
+exec CreateNewUser(20,'Mia',29,'abc123456', 456,'E','BLR',423514, 'User');
+exec CreateNewUser(21,'Noah',41,'changeme123', 789,'K','MUM', 400001, 'Admin');
+exec CreateNewUser(22,'Olivia',26,'pass1234', 234,'F','DEL',236140, 'User');
+exec CreateNewUser(23,'Peter',37,'password789',567, 'C', 'VJY',521230, 'User');
+exec CreateNewUser(24,'Queenie',24,'letmein789',890, 'G', 'BLR',423514, 'User');
+exec CreateNewUser(25,'Robert',34,'letmein000', 123, 'L','MUM', 400001, 'User');
+exec CreateNewUser(26,'Sarah',30,'abc456', 456, 'B','CHE',532015, 'User');
+exec CreateNewUser(27,'Thomas',40,'changeme000',789,'C','VJY',521230, 'Admin');
+exec CreateNewUser(28,'Una',22,'qwerty456', 234,'A','CHE',532015, 'User');
+exec CreateNewUser(29,'Victor',38,'password000',567,'D','BLR',423514, 'User');
+exec CreateNewUser(30,'William',33,'letmein999',890,'V','BLR',423514, 'User');
+
+create or replace procedure InsertPropertyRecord(a in number,b in number,c in number,d in date,e in date,f in number,g in varchar,h in number,i in number,k in number,l in number,m in number,n in varchar)is
+begin
+insert into property values(a,b,c,d,e,f,g,h,i,k,l,m,n);
+end;
+/
+
+exec InsertPropertyRecord(4, 2,3,'10-DEC-2016', '01-JAN-2026', 1100, 'Delhi', 15000, 8, 1975, 7, 1, 'DEL');
+exec InsertPropertyRecord(9, 3,4,'22-JUL-2019', '06-DEC-2026', 700, 'Mumbai', 5000, 10, 1987, 5, 1, 'MUM');
+exec InsertPropertyRecord(3, 4,5,'05-MAR-2020', '09-JUL-2027', 1000, 'Chennai', 8000, 4, 1995, 3, 1, 'CHE');
+exec InsertPropertyRecord(10, 5,2,'21-SEP-2018', '11-SEP-2026', 1500, 'Bengaluru', 12000, 16, 1982, 2, 1, 'BLR');
+exec InsertPropertyRecord(1, 6,1,'18-MAY-2021', '03-NOV-2027', 1200, 'Vijayawada',9000, 12, 1965, 9, 1, 'VJY');
+exec InsertPropertyRecord(3, 7,2,'28-FEB-2019', '15-AUG-2026', 500, 'Chennai', 5000, 17, 1978, 8, 1, 'CHE');
+exec InsertPropertyRecord(4, 8,4,'12-JUN-2017', '28-JAN-2025', 1800, 'Delhi', 14000, 6, 1960, 4, 1, 'DEL');
+exec InsertPropertyRecord(10, 9,3,'19-OCT-2020', '07-AUG-2028', 800, 'Bengaluru', 6000, 14, 1980, 10, 1, 'BLR');
+exec InsertPropertyRecord(5, 10,1,'06-AUG-2019', '15-MAY-2027', 1600, 'Vijayawada',5000, 11, 1972, 6, 1, 'VJY');
+exec InsertPropertyRecord(9, 11,2,'29-APR-2018', '09-OCT-2026', 900, 'Mumbai', 8700, 9, 1963, 3, 1, 'MUM');
+exec InsertPropertyRecord(19, 12,4,'17-NOV-2019', '20-MAR-2029', 1000, 'Chennai', 5500, 5, 1967, 4, 1, 'CHE');
+exec InsertPropertyRecord(8, 13,2,'24-DEC-2016', '15-JUN-2024', 1200, 'Delhi', 12000, 18, 1976, 8, 1, 'DEL');
+exec InsertPropertyRecord(24, 14,5, '01-JAN-2020', '18-AUG-2029', 700, 'Bengaluru', 9000, 7, 1958, 7, 1, 'BLR');
+exec InsertPropertyRecord(9, 15,2,'07-MAY-2017', '20-JUN-2025', 1400, 'Mumbai', 9000, 13, 1988, 6, 1, 'MUM');
+exec InsertPropertyRecord(3, 16,1,'01-JAN-2018', '10-JUN-2027', 1750, 'Chennai', 14200, 5, 1985, 7, 1, 'CHE');
+exec InsertPropertyRecord(20, 17,3,'17-MAR-2022', '26-DEC-2031', 625, 'Bengaluru', 12000, 3, 1973, 2, 1, 'BLR');
+exec InsertPropertyRecord(1, 18,3,'29-AUG-2018', '08-MAY-2024', 800, 'Vijayawada', 9000, 2005, 2005, 8, 1, 'VJY');
+exec InsertPropertyRecord(15, 19,2,'26-SEP-2014', '20-SEP-2023', 1050, 'Mumbai', 7700, 2007, 1998, 7, 1, 'MUM');
+exec InsertPropertyRecord(19, 20,3,'13-NOV-2016', '07-SEP-2026', 780, 'Chennai', 14000, 19, 1997, 4, 1, 'CHE');
+exec InsertPropertyRecord(7,21,4,'24-SEP-2015', '28-MAR-2025', 1600, 'Bengaluru', 16500, 16, 1952, 6, 1, 'BLR');
+exec InsertPropertyRecord(15,22,2,'12-JUL-2019', '15-SEP-2023', 700, 'Mumbai', 11000, 8, 1982, 7, 1, 'MUM');
+exec InsertPropertyRecord(5, 23,2,'17-MAR-2014', '10-MAY-2024', 1540, 'Vijayawada', 1900, 17, 1999, 5, 1, 'VJY');
+exec InsertPropertyRecord(10, 24,3,'26-JUL-2016', '09-MAR-2022', 1050, 'Bengaluru', 14500, 11, 1973, 10, 1, 'BLR');
+
+
+
+
+CREATE OR REPLACE PROCEDURE rentaproperty(
+    a IN NUMBER,
+    b IN NUMBER,
+    c IN DATE,
+    d IN DATE,
+    e IN NUMBER
+) AS 
+    g NUMBER;
+    i NUMBER;
+    h NUMBER;
+BEGIN 
+    SELECT rent,availabilty,hike INTO g,i,h
+    FROM property 
+    WHERE prop_id = a 
+    AND start_date <= c 
+    AND end_date >= d 
+    AND availabilty = 1;
+	
+    IF i<>0 THEN
+        INSERT INTO records (prop_id, adhar_id, start_date, end_date, rent, hike,comm)
+        VALUES (a, b, c, d, g,h,e);
+
+        UPDATE property 
+        SET availabilty = 0
+        WHERE prop_id = a;
+    END IF;
+END;
+/
+
+
+
+
+CREATE OR REPLACE PROCEDURE GetRentHistory(p_prop_id IN NUMBER)
+IS
+  v_prop_id records.prop_id%TYPE;
+  v_adhar_id records.adhar_id%TYPE;
+  v_start_date records.start_date%TYPE;
+  v_end_date records.end_date%TYPE;
+  v_rent records.rent%TYPE;
+  v_hike records.hike%TYPE;                
+  v_comm records.comm%TYPE;
+BEGIN
+  FOR rec IN (
+    SELECT prop_id, adhar_id, start_date, end_date, rent, hike, comm
+    FROM records
+    WHERE prop_id = p_prop_id
+  )
+  LOOP
+    DBMS_OUTPUT.PUT_LINE('prop_id: ' || rec.prop_id);
+    DBMS_OUTPUT.PUT_LINE('adhar_id: ' || rec.adhar_id);
+    DBMS_OUTPUT.PUT_LINE('start_date: ' || rec.start_date);
+    DBMS_OUTPUT.PUT_LINE('end_date: ' || rec.end_date);
+    DBMS_OUTPUT.PUT_LINE('rent: ' || rec.rent);
+    DBMS_OUTPUT.PUT_LINE('hike: ' || rec.hike);
+    DBMS_OUTPUT.PUT_LINE('comm: ' || rec.comm);
+	DBMS_OUTPUT.PUT_LINE('****');
+  END LOOP;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE SearchPropertyForRent(
+    p_location IN property.locality%TYPE
+)
+AS
+BEGIN
+  FOR r IN (
+    SELECT prop_id, address
+    FROM property
+    WHERE locality = p_location
+    AND availabilty = 1
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE('Property ID: ' || r.prop_id || ', Address: ' || r.address);
+  END LOOP;
+END;
+/
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE GetTenantDetails(p_prop_id IN NUMBER)
+IS
+  v_prop_id records.prop_id%TYPE;
+  v_adhar_id records.adhar_id%TYPE;
+  v_start_date records.start_date%TYPE;
+  v_end_date records.end_date%TYPE;
+  v_rent records.rent%TYPE;
+  v_hike records.hike%TYPE;
+  v_comm records.comm%TYPE;
+  v_name users.name%TYPE;
+  v_age users.age%TYPE;
+  v_doorno users.doorno%TYPE;
+  v_street users.street%TYPE;
+  v_city users.city%TYPE;
+  v_pin users.pin%TYPE;
+  v_job users.job%TYPE;
+BEGIN
+  -- Get the latest record for the given prop_id
+  SELECT prop_id, adhar_id, start_date, end_date, rent, hike, comm
+  INTO v_prop_id, v_adhar_id, v_start_date, v_end_date, v_rent, v_hike, v_comm
+  FROM (
+    SELECT prop_id, adhar_id, start_date, end_date, rent, hike, comm
+    FROM records
+    WHERE prop_id = p_prop_id
+    ORDER BY start_date DESC
+  )
+  WHERE ROWNUM = 1;
+
+  -- Get the user details for the associated adhar_id
+  SELECT name, age, doorno, street, city, pin, job
+  INTO v_name, v_age, v_doorno, v_street, v_city, v_pin, v_job
+  FROM users
+  WHERE adhar_id = v_adhar_id;
+
+  -- Print the results
+  DBMS_OUTPUT.PUT_LINE('prop_id: ' || v_prop_id);
+  DBMS_OUTPUT.PUT_LINE('adhar_id: ' || v_adhar_id);
+  DBMS_OUTPUT.PUT_LINE('start_date: ' || v_start_date);
+  DBMS_OUTPUT.PUT_LINE('end_date: ' || v_end_date);
+  DBMS_OUTPUT.PUT_LINE('rent: ' || v_rent);
+  DBMS_OUTPUT.PUT_LINE('hike: ' || v_hike);
+  DBMS_OUTPUT.PUT_LINE('comm: ' || v_comm);
+  DBMS_OUTPUT.PUT_LINE('name: ' || v_name);
+  DBMS_OUTPUT.PUT_LINE('age: ' || v_age);
+  DBMS_OUTPUT.PUT_LINE('doorno: ' || v_doorno);
+  DBMS_OUTPUT.PUT_LINE('street: ' || v_street);
+  DBMS_OUTPUT.PUT_LINE('city: ' || v_city);
+  DBMS_OUTPUT.PUT_LINE('pin: ' || v_pin);
+END;
+/
+
+
+exec rentaproperty(10,2,'20-OCT-2022','28-FEB-2023',120);
+exec rentaproperty(10,5,'30-MAR-2023','31-AUG-2023',130);
+exec rentaproperty(6,3,'20-MAY-2021','31-JAN-2022',160);
+exec rentaproperty(6,4,'02-FEB-2022','31-DEC-2023',200);
+exec rentaproperty(14,8,'03-JAN-2020','28-DEC-2023',500);
+exec rentaproperty(14,10,'03-FEB-2023','04-MAR-2029',800);
+exec rentaproperty(16,1,'26-JAN-2018',05-MAY-2020',900);
+exec rentaproperty(16,5,'31-DEC-2021','06-JUN-2022',760);
+exec rentaproperty(20,7,'13-DEC-2016','17-SEP-2023',450);
+exec rentaproperty(20,11,'18-MAY-2024','31-OCT-2025',2);
+
+CREATE OR REPLACE PROCEDURE GetPropertyRecords(
+    p_adhar_id IN users.adhar_id%TYPE
+)
+AS
+BEGIN
+  FOR r IN (
+    SELECT prop_id
+    FROM property
+    WHERE adhar_id = p_adhar_id
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE('Property ID: ' || r.prop_id);
+  END LOOP;
+END;
+/
